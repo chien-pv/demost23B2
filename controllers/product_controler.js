@@ -2,10 +2,13 @@ const Product = require("../model/product");
 
 class ProductController {
   static async create(req, res) {
-    console.log("create");
-    console.log(req.body);
-
-    res.render("product_new");
+    let { name, description, price, stock } = req.body;
+    try {
+      let product = await Product.create({ name, description, price, stock });
+      res.redirect("/products");
+    } catch (error) {
+      res.render("product_new");
+    }
   }
   static async new(req, res) {
     console.log("new");
