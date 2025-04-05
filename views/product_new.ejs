@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/bootstrap-5.3.3/css/bootstrap.css">
+        <script src="/bootstrap-5.3.3/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/css/index.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Tạo mới sản phẩm</h1>
+            <form method="post" action="/products/create">
+                <label>Name</label>
+                <input placeholder="Nhập tên" name="name" type="text"
+                    class="form-control" />
+                <label>Description</label>
+                <input name="description" type="text" class="form-control" />
+                <label>Price</label>
+                <input name="price" type="text" class="form-control" />
+                <label>Stock</label>
+                <input name="stock" type="text" class="form-control" />
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

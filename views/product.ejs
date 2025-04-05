@@ -10,6 +10,7 @@
     </head>
     <body class="container">
         <h1>Product Management</h1>
+        <a class="btn btn-info" href="/products/new">New</a>
         <form action method="get">
             <div class="form-group d-flex col-5">
                 <input name="q" type="text" class="form-control">
@@ -24,6 +25,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">price</th>
                     <th scope="col">stock</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +36,10 @@
                     <td><%= item.description %></td>
                     <td><%= item.price %></td>
                     <td><%= item.stock %></td>
+                    <td>
+                        <a href="/products/delete/<%= item.id %>"
+                            class="btn btn-outline-danger">Delete</a>
+                    </td>
                 </tr>
                 <% }); %>
 
