@@ -1,10 +1,16 @@
 const Product = require("../model/product");
 
 class ProductController {
-  static async new(req, res) {
+  static async create(req, res) {
+    console.log("create");
+    console.log(req.body);
+
     res.render("product_new");
   }
-
+  static async new(req, res) {
+    console.log("new");
+    res.render("product_new");
+  }
   static async index(req, res) {
     let q = req.query.q;
     let page = parseInt(req.query.page);
