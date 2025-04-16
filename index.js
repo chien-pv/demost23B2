@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const session = require('express-session')
 
 const rootRouter = require("./routes/root");
 const userRouter = require("./routes/user");
@@ -10,6 +11,13 @@ const userApiRouter = require("./routes/api/user");
 connectMongo().catch((err) => console.log(err));
 
 const app = express();
+
+app.set('trust proxy', 1) 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+}))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded());
