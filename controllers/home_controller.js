@@ -3,6 +3,7 @@ const user = {
   email: "vana@gmail.com",
 };
 const User = require("../model/user");
+const bcrypt = require("bcryptjs");
 
 class HomeController {
   static index(req, res) {
@@ -39,15 +40,16 @@ class HomeController {
   }
 
   static async createUser(req, res) {
-    const { name, email, password, password_confirmation } = req.body;
-    console.log(name, email, password);
-    if(name && email && password && password_confirmation){
-      if(password == password_confirmation){
-        const user = await User.create({ name, email, password });
-         return res.redirect("/login");
-      }
+    let { name, email, password, password_confirmation } = req.body;
+   if(name && email && password && password_confirmation){
+    if(password == password_confirmation){
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt); 
+      const user = await User.create({ name, email, password: hash});
+      return res.redirect("/login");
     }
-    res.render("register");
+   }
+   res.render("register");
   }
 }
 
