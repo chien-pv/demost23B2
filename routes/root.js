@@ -7,5 +7,7 @@ router.get("/about", HomeController.about);
 router.get("/login", HomeController.login);
 router.post("/login", HomeController.createSession);
 router.get("/register", HomeController.register);
+router.post("/register", HomeController.createUser);
+
 
 module.exports = router;

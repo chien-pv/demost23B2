@@ -37,6 +37,18 @@ class HomeController {
   static async register(req, res) {
     res.render("register");
   }
+
+  static async createUser(req, res) {
+    const { name, email, password, password_confirmation } = req.body;
+    console.log(name, email, password);
+    if(name && email && password && password_confirmation){
+      if(password == password_confirmation){
+        const user = await User.create({ name, email, password });
+         return res.redirect("/login");
+      }
+    }
+    res.render("register");
+  }
 }
 
 module.exports = HomeController;
