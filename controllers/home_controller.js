@@ -33,6 +33,10 @@ class HomeController {
       res.render("login");
     }
   }
+
+  static async register(req, res) {
+    res.render("register");
+  }
 }
 
 module.exports = HomeController;
