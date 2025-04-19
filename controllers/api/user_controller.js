@@ -1,5 +1,8 @@
 const User = require("../../model/user");
 
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 class UserController {
     static async getUsers(req, res) {
         const users = await User.find();
@@ -60,11 +63,28 @@ class UserController {
             res.json({
                 message: "User deleted successfully"
             });
+
         } catch (error) {
             res.status(500).json({
                 message: "User not deleted",
                 error: error.message
             });
+        }
+    }
+
+    static async login(req, res) {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+        console.log(user);
+        if (user) {
+        if(bcrypt.compareSync(password, user.password)){
+            const token = jwt.sign({ name: user.name, email: user.email },"loginabv", { expiresIn: "1h" });
+            res.json({ message: "Login successfully", token });
+        } else {
+            res.json({ message: "Password is incorrect" });
+        }
+        } else {
+            res.json({ message: "User not found" });
         }
     }
 }

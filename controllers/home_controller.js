@@ -22,9 +22,9 @@ class HomeController {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-
+    console.log(user);
     if (user) {
-      if(user.password == password){
+      if(bcrypt.compareSync(password, user.password)){
         req.session.user = user;
         res.redirect("/");
       } else {
